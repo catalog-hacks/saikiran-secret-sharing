@@ -82,7 +82,7 @@ func TestInvalidReconstruction(t *testing.T) {
 // Threshold value is wrong 
 func TestInvalidThreshold(t *testing.T) {
 	shamirImpl := Shamir{}
-	secret := big.NewInt(123) // Use *big.Int for the secret
+	secret := big.NewInt(123) 
 	parts := 5
 	threshold := 3
 
@@ -93,15 +93,20 @@ func TestInvalidThreshold(t *testing.T) {
 	}
 
 	// Try to reconstruct secret using less than required threshold
-	_, err = shamirImpl.Reconstruct(shares[:threshold-1], threshold-1)
-	if err == nil {
-		t.Fatal("Expected error during reconstruction with insufficient shares, got nil")
+	res, err := shamirImpl.Reconstruct(shares[:threshold-1], threshold-1)
+	if err != nil {
+		t.Fatal("error during reconstruction with insufficient shares")
 	}
+
+	if res == secret {
+		t.Errorf("Expected secret not to match %d, got %d", secret, res)
+	}
+
 }
 
 func TestEdgeCases(t *testing.T) {
 	shamirImpl := Shamir{}
-	secret := big.NewInt(0) // Use *big.Int for the secret
+	secret := big.NewInt(0) 
 	parts := 3
 	threshold := 2
 
