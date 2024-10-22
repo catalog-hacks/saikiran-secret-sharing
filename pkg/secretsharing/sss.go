@@ -1,13 +1,15 @@
 package secretsharing
 
-// Share represents a single share with X and Y values
+import (
+	"math/big"
+)
+
 type Share struct {
-	X int
-	Y int
+	X *big.Int 
+	Y *big.Int 
 }
 
-// ShamirSecretSharing interface defines the operations for Shamir's Secret Sharing
 type ShamirSecretSharing interface {
-	Share(secret int, parts int, threshold int) ([]Share, error)
-	Reconstruct(shares []Share) (int, error)
+	Share(secret *big.Int, parts int, threshold int) ([]Share, error) 
+	Reconstruct(shares []Share, k int) (*big.Int, error)               
 }
