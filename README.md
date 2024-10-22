@@ -37,14 +37,14 @@ This project implements secret sharing schemes, including Shamir's Secret Sharin
 -   To build the application for your current platform, run:
 
     ```bash
-     make build
+    make build
     ```
 
 -   Run the Application
     To run the application directly, you can use:
 
     ```bash
-     make run
+    make run
     ```
 
 -   Testing
